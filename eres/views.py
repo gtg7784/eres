@@ -1,3 +1,4 @@
+from .models import Post
 from django.http.response import HttpResponse
 from django.shortcuts import redirect, render
 from django.views.decorators.csrf import csrf_exempt
@@ -5,21 +6,26 @@ from django.contrib.auth.models import User
 from django.contrib import auth
 
 def index(request):
-  status = {"isLogin": False}
+  isLogin = False
   if request.user.is_authenticated:
-    status = {"isLogin": True}
+    isLogin = True
 
-  return render(request, 'eres/index.html', status)
+  return render(request, 'eres/index.html', {"isLogin": isLogin})
 
 def category(request):
+  isLogin = False
+  if request.user.is_authenticated:
+    isLogin = True
+
   category = request.GET.get('category', None)
-  return render(request, 'eres/index.html', {category: category})
+  return render(request, 'eres/index.html', {"category": category, "isLogin": isLogin})
 
 def generic(request):
-  status = {"isLogin": False}
+  isLogin = False
   if request.user.is_authenticated:
-    status = {"isLogin": True}
-  return render(request, 'eres/generic.html', status)
+    isLogin = True
+
+  return render(request, 'eres/generic.html', {"isLogin": isLogin})
 
 def post(request):
   return render(request, 'eres/post.html')
@@ -76,18 +82,23 @@ def signout(request):
 
 
 def myinfo(request):
+  if request.user.is_authenticated:
+    return redirect("index")
+
   info = {
     "username": request.user.username,
     "email": request.user.email,
     "first_name": request.user.first_name
   }
 
+  posts = Post.objects.all().filter(author=request.user.username)
+
   if request.method == "POST":
     email = request.POST.get("email", None)
     first_name = request.POST.get("first_name", None)
 
     if first_name is None:
-      return render(request, 'eres/myinfo.html', {"info": info, "error": "별명을 입력해주세요"})
+      return render(request, 'eres/myinfo.html', {"info": info, "error": "별명을 입력해주세요", "isLogin": True})
 
     user = User.objects.all().filter(id=request.user.id)
     user.email = email
@@ -96,7 +107,8 @@ def myinfo(request):
     user.update()
     info["email"] = email
     info["first_name"] = first_name
-    return render(request, 'eres/myinfo.html', {"info": info, "script": "정보가 수정되었습니다."})
 
-  return render(request, 'eres/myinfo.html', {"info": info})
+    return render(request, 'eres/myinfo.html', {"info": info, "script": "정보가 수정되었습니다.", "isLogin": True})
+
+  return render(request, 'eres/myinfo.html', {"info": info, "posts": posts, "isLogin": True})
 

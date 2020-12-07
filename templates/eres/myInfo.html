@@ -39,18 +39,9 @@
 				</div>
 			</header>
 			<!-- Menu -->
-			<nav id="menu">
-                <h2>Menu</h2> 
-                <ul>
-                    <li><a href="/eres/index/">Home</a></li>
-                    <li><a href="/eres/myinfo">내정보</a></li>
-                    <li><a href="/eres/index/">한식</a></li>
-                    <li><a href="/eres/index/">중식</a></li>
-                    <li><a href="/eres/index/">일식</a></li>
-                    <li><a href="/eres/index/">양식</a></li>
-                    <li><a href="/eres/index/">디저트</a></li>
-                </ul>
-            </nav>
+			{% block content %}
+			{% include 'eres/menu.html' %}
+			{% endblock %}
 			<div class="info">
 				<div class="inner">
 					<h1>내 정보</h1>
@@ -85,13 +76,13 @@
 					<div class="postbox">
 						<ul class="list-group">
 							{% if posts %}
-							{% for i in posts %}
-							
-								<li class="list-group-item list-group-item-light post-list">
-									<span>{{ i.title }}</span>
-									<span>{{ i.create_at }}</span>
-								</li>
-							{% endfor %}
+								{% for i in posts %}
+								
+									<li class="list-group-item list-group-item-light post-list">
+										<span>{{ i.title }}</span>
+										<span>{{ i.create_at }}</span>
+									</li>
+								{% endfor %}
 							{% endif %}
 						</ul>
 					</div>
