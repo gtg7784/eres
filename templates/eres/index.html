@@ -19,10 +19,12 @@
 					<header id="header">
 						<div class="inner">
 							<!-- Logo -->
-								<a href="/eres/index/" class="logo">
+								<a href="/index/" class="logo">
 									<span class="symbol"><img src="{% static 'images/icon.png' %}"></span><span class="title">ERES</span>
 								</a>
-								<button class="plus" onclick="document.location.href = '/eres/post'">+</button>
+								{%if isLogin %}
+								<button class="plus" onclick="document.location.href = '/post'">+</button>
+								{% endif %}
 							<!-- Nav -->
 								<nav>
 									<ul>
@@ -65,7 +67,7 @@
 									<span class="image">
 										<img src="{% static 'images/pic01.jpg' %}" alt="" />
 									</span>
-									<a href="/eres/generic/">
+									<a href="/generic/">
 										<h2>Magna</h2>
 										<div class="content">
 											<p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
@@ -76,7 +78,7 @@
 									<span class="image">
 										<img src="{% static 'images/pic02.jpg' %}" alt="" />
 									</span>
-									<a href="/eres/generic/">
+									<a href="/generic/">
 										<h2>Lorem</h2>
 										<div class="content">
 											<p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
@@ -87,7 +89,7 @@
 									<span class="image">
 										<img src="{% static 'images/pic03.jpg' %}" alt="" />
 									</span>
-									<a href="/eres/generic/">
+									<a href="/generic/">
 										<h2>Feugiat</h2>
 										<div class="content">
 											<p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
@@ -98,7 +100,7 @@
 									<span class="image">
 										<img src="{% static 'images/pic04.jpg' %}" alt="" />
 									</span>
-									<a href="/eres/generic/">
+									<a href="/generic/">
 										<h2>Tempus</h2>
 										<div class="content">
 											<p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
@@ -109,7 +111,7 @@
 									<span class="image">
 										<img src="{% static 'images/pic05.jpg' %}" alt="" />
 									</span>
-									<a href="/eres/generic/">
+									<a href="/generic/">
 										<h2>Aliquam</h2>
 										<div class="content">
 											<p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
@@ -120,7 +122,7 @@
 									<span class="image">
 										<img src="{% static 'images/pic06.jpg' %}" alt="" />
 									</span>
-									<a href="/eres/generic/">
+									<a href="/generic/">
 										<h2>Veroeros</h2>
 										<div class="content">
 											<p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>

@@ -3,18 +3,20 @@
   <ul>
     <li>
       {%if isLogin %}
-      <a href="/eres/signout" class="sign" style="float: left; border: 1px; margin-right: 20px; border: 1px solid white; padding: 10px; border-radius: 10px;">Sign Out</a>
+      <a href="/signout" class="sign" style="float: left; border: 1px; margin-right: 20px; border: 1px solid white; padding: 10px; border-radius: 10px;">로그아웃</a>
       {% else %}
-      <a href="/eres/signin" class="sign" style="float: left; border: 1px; margin-right: 20px; border: 1px solid white; padding: 10px; border-radius: 10px;">Sign in</a>
+      <a href="/signin" class="sign" style="float: left; border: 1px; margin-right: 20px; border: 1px solid white; padding: 10px; border-radius: 10px;">로그인</a>
       {% endif %}
-      <a href="/eres/signup" style="padding: 10px; margin-bottom: 15px;">Sign up</a>
+      <a href="/signup" style="padding: 10px; margin-bottom: 15px;">회원가입</a>
     </li>
-    <li><a href="/eres/index/">Home</a></li>
-    <li><a href="/eres/myinfo">내정보</a></li>
-    <li><a href="/eres/index/?category=korean">한식</a></li>
-    <li><a href="/eres/index/?category=chinese">중식</a></li>
-    <li><a href="/eres/index/?category=japanese">일식</a></li>
-    <li><a href="/eres/index/?category=western">양식</a></li>
-    <li><a href="/eres/index/?category=dessert">디저트</a></li>
+    <li><a href="/">메인</a></li>
+    {%if isLogin %}
+    <li><a href="/myinfo">내 정보</a></li>
+    {% endif %}
+    <li><a href="/index/?category=korean">한식</a></li>
+    <li><a href="/index/?category=chinese">중식</a></li>
+    <li><a href="/index/?category=japanese">일식</a></li>
+    <li><a href="/index/?category=western">양식</a></li>
+    <li><a href="/index/?category=dessert">디저트</a></li>
   </ul>
 </nav>

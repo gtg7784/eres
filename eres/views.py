@@ -28,6 +28,18 @@ def generic(request):
   return render(request, 'eres/generic.html', {"isLogin": isLogin})
 
 def post(request):
+  if not request.user.is_authenticated:
+    return redirect("index")
+
+  if request.method == "POST":
+    title = request.POST.get("title", "")
+    contents = request.POST.get("contents", "")
+    category = request.POST.get("category", "")
+    author = request.user.first_name
+
+    post = Post(title=title, contents=contents, category=category, author=author)
+
+    
   return render(request, 'eres/post.html')
 
 @csrf_exempt
@@ -54,18 +66,18 @@ def signin(request):
 @csrf_exempt
 def signup(request):
   if request.method == "POST":
-    username = request.POST.get("username", None)
-    first_name = request.POST.get("first_name", None)
-    password1 = request.POST.get("password1", None)
-    password2 = request.POST.get("password2", None)
+    username = request.POST.get("username", "")
+    first_name = request.POST.get("first_name", "")
+    password1 = request.POST.get("password1", "")
+    password2 = request.POST.get("password2", "")
 
-    if username is None:
+    if username == "":
       return render(request, "eres/signup.html", {"error": "아이디를 입력해주세요"})
 
-    if first_name is None:
+    if first_name == "":
       return render(request, "eres/signup.html", {"error": "별명을 입력해주세요"})
 
-    if password1 is None or password2 is None:
+    if password1 == "" or password2 == "":
       return render(request, "eres/signup.html", {"error": "비밀번호를 입력해주세요"})
 
     if password1 == password2:

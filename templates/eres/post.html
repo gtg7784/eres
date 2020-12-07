@@ -1,11 +1,97 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  <!-- 제목, 내용, 사진, 카테고리, -->
-</body>
+{% load static %}
+
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>ERES</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="{% static 'assets/css/main.css' %}">
+		<noscript>
+			<link rel="stylesheet" type="text/css" href="{% static 'assets/css/noscript.css' %}">
+		</noscript>
+	</head>
+	<body class="is-preload">
+		<!-- Wrapper -->
+			<div id="wrapper">
+				
+				<!-- Header -->
+					<header id="header">
+						<div class="inner">
+							<!-- Logo -->
+								<a href="/index/" class="logo">
+									<span class="symbol"><img src="{% static 'images/icon.png' %}"></span><span class="title">ERES</span>
+								</a>
+							<!-- Nav -->
+								<nav>
+									<ul>
+										
+										<!-- dribbble -->
+										<a class="dribbble" href="https://dribbble.com/shots/4871057-Search-loading-animation" target="_blank">
+											<img src="https://cdn.dribbble.com/assets/dribbble-ball-1col-dnld-e29e0436f93d2f9c430fde5f3da66f94493fdca66351408ab0f96e2ec518ab17.png" alt="">
+										</a>
+
+										<li><a href="#menu">Menu</a></li>
+									</ul>
+								</nav>
+
+						</div>
+					</header>
+
+				<!-- Menu -->
+					{% block content %}
+					{% include 'eres/menu.html' %}
+					{% endblock %}
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+              <section>
+                <h2>글쓰기</h2>
+                <form method="POST" action="{% url 'post' %}">
+                  <div class="row gtr-uniform">
+                    <div class="col-6 col-12-xsmall">
+                      <input type="text" name="title" id="name" placeholder="제목" />
+                    </div>
+                    <div class="col-12">
+                      <select name="category" id="category">
+                        <option value="">카테고리</option>
+                        <option value="korean">한식</option>
+                        <option value="chinese">중식</option>
+                        <option value="japanese">일식</option>
+                        <option value="western">양식</option>
+                        <option value="dessert">디저트</option>
+                      </select>
+                    </div>
+                    <div class="col-12">
+                      <textarea name="contents" style="min-height: 300px;" placeholder="내용을 입력해주세요" rows="10"></textarea>
+                    </div>
+                    <div class="col-12">
+                      <ul class="actions">
+                        <li><input class="button solid" value="사진 업로드" /></li>
+                      </ul>
+                    </div>
+                    <div class="col-12">
+                      <ul class="actions">
+                        <li><input type="submit" value="작성" class="primary" /></li>
+                      </ul>
+                    </div>
+                  </div>
+                </form>
+              </section>
+						</div>
+					</div>
+
+				
+			</div>
+
+		<!-- Scripts -->
+		
+			<script src="{% static 'assets/js/jquery.min.js' %}"></script>
+			<script src="{% static 'assets/js/browser.min.js' %}"></script>
+			<script src="{% static 'assets/js/breakpoints.min.js' %}"></script>
+			<script src="{% static 'assets/js/util.js' %}"></script>
+			<script src="{% static 'assets/js/main.js' %}"></script>
+
+	</body>
 </html>
