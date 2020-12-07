@@ -1,0 +1,163 @@
+{% load static %}
+
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>ERES</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="{% static 'assets/css/main.css' %}">
+		<noscript>
+			<link rel="stylesheet" type="text/css" href="{% static 'assets/css/noscript.css' %}">
+		</noscript>
+	</head>
+	<body class="is-preload">
+		<!-- Wrapper -->
+			<div id="wrapper">
+				
+				<!-- Header -->
+					<header id="header">
+						<div class="inner">
+							<!-- Logo -->
+								<a href="/eres/index/" class="logo">
+									<span class="symbol"><img src="{% static 'images/icon.png' %}"></span><span class="title">ERES</span>
+								</a>
+								<button class="plus" >+</button>
+							<!-- Nav -->
+								<nav>
+									<ul>
+										<div class="search">
+											<div class="icon">
+												<span>
+													<svg viewBox="0 0 40 40">
+														<path d="M3,3 L37,37"></path>
+													</svg>
+												</span>
+											</div>
+											<div class="field">
+												<input type="text" placeholder="Search...">
+											</div>
+										</div>
+										
+										<!-- dribbble -->
+										<a class="dribbble" href="https://dribbble.com/shots/4871057-Search-loading-animation" target="_blank">
+											<img src="https://cdn.dribbble.com/assets/dribbble-ball-1col-dnld-e29e0436f93d2f9c430fde5f3da66f94493fdca66351408ab0f96e2ec518ab17.png" alt="">
+										</a>
+
+										<li><a href="#menu">Menu</a></li>
+									</ul>
+								</nav>
+
+						</div>
+					</header>
+
+				<!-- Menu -->
+					<nav id="menu">
+						<h2>Menu</h2> 
+						<ul>
+							<li>
+								{%if isLogin %}
+								<a href="/eres/signout" class="sign" style="float: left; border: 1px; margin-right: 20px; border: 1px solid white; padding: 10px; border-radius: 10px;">Sign Out</a>
+								{% else %}
+								<a href="/eres/signin" class="sign" style="float: left; border: 1px; margin-right: 20px; border: 1px solid white; padding: 10px; border-radius: 10px;">Sign in</a>
+								{% endif %}
+								<a href="/eres/signup" style="padding: 10px; margin-bottom: 15px;">Sign up</a>
+							</li>
+							<li><a href="/eres/index/">Home</a></li>
+							<li><a href="myInfo.html">내정보</a></li>
+							<li><a href="/eres/index/?category=korean">한식</a></li>
+							<li><a href="/eres/index/?category=chinese">중식</a></li>
+							<li><a href="/eres/index/?category=japanese">일식</a></li>
+							<li><a href="/eres/index/?category=western">양식</a></li>
+							<li><a href="/eres/index/?category=dessert">디저트</a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<section class="tiles">
+								<article class="style1">
+									<span class="image">
+										<img src="{% static 'images/pic01.jpg' %}" alt="" />
+									</span>
+									<a href="/eres/generic/">
+										<h2>Magna</h2>
+										<div class="content">
+											<p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
+										</div>
+									</a>
+								</article>
+								<article class="style2">
+									<span class="image">
+										<img src="{% static 'images/pic02.jpg' %}" alt="" />
+									</span>
+									<a href="/eres/generic/">
+										<h2>Lorem</h2>
+										<div class="content">
+											<p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
+										</div>
+									</a>
+								</article>
+								<article class="style3">
+									<span class="image">
+										<img src="{% static 'images/pic03.jpg' %}" alt="" />
+									</span>
+									<a href="/eres/generic/">
+										<h2>Feugiat</h2>
+										<div class="content">
+											<p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
+										</div>
+									</a>
+								</article>
+								<article class="style4">
+									<span class="image">
+										<img src="{% static 'images/pic04.jpg' %}" alt="" />
+									</span>
+									<a href="/eres/generic/">
+										<h2>Tempus</h2>
+										<div class="content">
+											<p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
+										</div>
+									</a>
+								</article>
+								<article class="style5">
+									<span class="image">
+										<img src="{% static 'images/pic05.jpg' %}" alt="" />
+									</span>
+									<a href="/eres/generic/">
+										<h2>Aliquam</h2>
+										<div class="content">
+											<p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
+										</div>
+									</a>
+								</article>
+								<article class="style6">
+									<span class="image">
+										<img src="{% static 'images/pic06.jpg' %}" alt="" />
+									</span>
+									<a href="/eres/generic/">
+										<h2>Veroeros</h2>
+										<div class="content">
+											<p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
+										</div>
+									</a>
+								</article>
+							</section>
+						</div>
+					</div>
+
+				
+			</div>
+
+		<!-- Scripts -->
+		
+			<script src="{% static 'assets/js/jquery.min.js' %}"></script>
+			<script src="{% static 'assets/js/browser.min.js' %}"></script>
+			<script src="{% static 'assets/js/breakpoints.min.js' %}"></script>
+			<script src="{% static 'assets/js/util.js' %}"></script>
+			<script src="{% static 'assets/js/main.js' %}"></script>
+
+	</body>
+</html>

@@ -1,0 +1,102 @@
+/*
+	Phantom by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+*/
+
+/* Tiles */
+/* 
+	body.is-preload .tiles article {
+		-moz-transform: none;
+		-webkit-transform: none;
+		-ms-transform: none;
+		transform: none;
+		opacity: 1;
+	} */
+
+	.infobox{
+		padding: 40px 100px 40px 100px;
+		display:flex;
+		flex-direction: column;
+		min-width: 965px;
+		width: 90%;
+		margin: 20px auto;
+		border:1px solid rgba(var(--b6a,219,219,219),1);
+	}
+	.postbox{
+		display:flex;
+		flex-direction: column;
+		min-width: 965px;
+		width: 90%;
+		margin: 20px auto;
+	}
+	
+	h1{
+		margin: 0px !important;
+	}
+	
+	.inputbox > div{  
+		display: flex;
+		margin: 10px 0px;
+	}
+	.inputbox > div > label{
+		width: 120px;
+		padding: 0px !important;
+		margin: 0px !important;
+		display:flex;
+		justify-content: center;
+		align-items: center;
+	}
+	.inputbox > div > input{
+		width: 320px;
+		height: fit-content;
+		font-size: 20px;
+	}
+	
+	.inputbox{
+		display:flex;
+		flex-direction: column;
+		align-items:center;
+	}
+	
+	label{
+		color:#262626;
+		font-size:16px;
+		margin-right: 64px;
+	}
+	
+	input[type="text"]{
+		padding:0px 10px;
+		border:1px solid rgb(219,219,219);
+		border-radius: 3px;
+		font-size:30px;
+	}
+	
+	
+	.infobtn2{
+		width:100%;
+		display: flex;
+		justify-content: flex-end;
+	}
+	
+	.infobtn{
+		margin-left: auto;
+	}
+	
+	
+	.main {
+		padding: 0em 0 6em 0 ;
+	}
+	.post{
+		margin-top: 70px;
+	}
+	.post-list{
+		display:flex !important;
+		justify-content: space-between;
+		
+	}
+	@media screen and (max-width: 736px) {
+		.main {
+			padding: 0em 0 4em 0 ;
+		}
+	}
