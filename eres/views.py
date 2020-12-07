@@ -16,7 +16,10 @@ def category(request):
   return render(request, 'eres/index.html', {category: category})
 
 def generic(request):
-  return render(request, 'eres/generic.html')
+  status = {"isLogin": False}
+  if request.user.is_authenticated:
+    status = {"isLogin": True}
+  return render(request, 'eres/generic.html', status)
 
 def post(request):
   return render(request, 'eres/post.html')
@@ -70,4 +73,30 @@ def signup(request):
 def signout(request):
   auth.logout(request)
   return redirect("index")
+
+
+def myinfo(request):
+  info = {
+    "username": request.user.username,
+    "email": request.user.email,
+    "first_name": request.user.first_name
+  }
+
+  if request.method == "POST":
+    email = request.POST.get("email", None)
+    first_name = request.POST.get("first_name", None)
+
+    if first_name is None:
+      return render(request, 'eres/myinfo.html', {"info": info, "error": "별명을 입력해주세요"})
+
+    user = User.objects.all().filter(id=request.user.id)
+    user.email = email
+    user.first_name = first_name
+
+    user.update()
+    info["email"] = email
+    info["first_name"] = first_name
+    return render(request, 'eres/myinfo.html', {"info": info, "script": "정보가 수정되었습니다."})
+
+  return render(request, 'eres/myinfo.html', {"info": info})
 

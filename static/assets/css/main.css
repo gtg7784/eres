@@ -3553,3 +3553,7 @@ input, select, textarea {
 	   .sign:hover{
 		   background-color: white;
 	   }
+
+		 .error {
+			 color: red;
+		 }
