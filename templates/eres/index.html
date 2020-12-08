@@ -10,11 +10,16 @@
 		<noscript>
 			<link rel="stylesheet" type="text/css" href="{% static 'assets/css/noscript.css' %}">
 		</noscript>
+		<!-- {% if script %} -->
+		<script>
+			alert("{{ script }}")
+			document.location.href = "/"
+		</script>
+		<!-- {% endif %} -->
 	</head>
 	<body class="is-preload">
 		<!-- Wrapper -->
 			<div id="wrapper">
-				
 				<!-- Header -->
 					<header id="header">
 						<div class="inner">

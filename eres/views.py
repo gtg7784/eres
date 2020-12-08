@@ -1,9 +1,10 @@
 from .models import Post
-from django.http.response import HttpResponse
+from django.http.response import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
 from django.contrib import auth
+from django.urls import reverse
 from .forms import PostForm
 
 def index(request):
@@ -19,13 +20,19 @@ def index(request):
 
   return render(request, 'eres/index.html', {"isLogin": isLogin})
 
-def category(request):
+def category(request, category):
   isLogin = False
   if request.user.is_authenticated:
     isLogin = True
 
-  category = request.GET.get('category', None)
-  return render(request, 'eres/index.html', {"category": category, "isLogin": isLogin})
+  print(f"category: {category}")
+
+  posts = Post.objects.filter(category=category)
+  
+  if not posts.exists():
+    return render(request, 'eres/index.html', {"isLogin": isLogin, "posts": posts, "script": "해당 카테고리의 게시글이 없습니다."})
+
+  return render(request, 'eres/index.html', {"isLogin": isLogin, "posts": posts})
 
 def generic(request, post_id):
   isLogin = False
@@ -42,7 +49,7 @@ def generic(request, post_id):
 @csrf_exempt
 def post(request):
   if not request.user.is_authenticated:
-    return redirect("index")
+    return redirect("eres:index")
 
   if request.method == "POST":
     title = request.POST.get("title", "")
@@ -59,11 +66,11 @@ def post(request):
       post.author = author
       post.save()
 
-      return redirect("index")
+      return redirect("eres:index")
     else:
       post = Post(title=title, contents=contents, category=category, author=author)
       post.save()
-      return redirect("index")
+      return redirect("eres:index")
   return render(request, 'eres/post.html')
 
 @csrf_exempt
@@ -81,7 +88,7 @@ def signin(request):
 
     if user is not None:
       auth.login(request, user)
-      return redirect("index")
+      return redirect("eres:index")
     else:
       return render(request, 'eres/signin.html', {'error': '사용자의 ID 또는 비밀번호가 잘못되었습니다.'})
   return render(request, 'eres/signin.html')
@@ -108,7 +115,7 @@ def signup(request):
         user = User.objects.create_user(username=username, password=password1, first_name=first_name)
         user.save()
         auth.login(request, user)
-        return redirect("index")
+        return redirect("eres:index")
       except Exception:
         return render(request, 'eres/signup.html', {"error": "아이디가 중복되었습니다 "})
     else:
@@ -118,12 +125,12 @@ def signup(request):
 
 def signout(request):
   auth.logout(request)
-  return redirect("index")
+  return redirect("eres:index")
 
 
 def myinfo(request):
-  if request.user.is_authenticated:
-    return redirect("index")
+  if not request.user.is_authenticated:
+    return redirect("eres:index")
 
   info = {
     "username": request.user.username,
