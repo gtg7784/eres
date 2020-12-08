@@ -10,12 +10,12 @@
 		<noscript>
 			<link rel="stylesheet" type="text/css" href="{% static 'assets/css/noscript.css' %}">
 		</noscript>
-		<!-- {% if script %} -->
+		{% if script %}
 		<script>
 			alert("{{ script }}")
 			document.location.href = "/"
 		</script>
-		<!-- {% endif %} -->
+		{% endif %}
 	</head>
 	<body class="is-preload">
 		<!-- Wrapper -->
@@ -34,7 +34,7 @@
 							<!-- Nav -->
 								<nav>
 									<ul>
-										<div class="search">
+										<form class="search" method="GET" action="{% url 'eres:index' %}">
 											<div class="icon">
 												<span>
 													<svg viewBox="0 0 40 40">
@@ -43,9 +43,10 @@
 												</span>
 											</div>
 											<div class="field">
-												<input type="text" placeholder="Search...">
+												<input type="text" name="query" placeholder="Search...">
+												<input type="submit" style="display: none;" >
 											</div>
-										</div>
+										</form>
 										
 										<!-- dribbble -->
 										<a class="dribbble" href="https://dribbble.com/shots/4871057-Search-loading-animation" target="_blank">
@@ -72,7 +73,7 @@
 								{% for post in posts %}
 								{% if post.file %}
 									<article>
-										<span class="image">
+										<span class="image" style="width: 325.328px; height: 300.438px; display: flex; justify-content: center; align-items: center;">
 											<img src="{{ post.file.url }}" alt="" />
 										</span>
 										<a href="/generic/{{ post.id }}">

@@ -12,6 +12,12 @@ def index(request):
   if request.user.is_authenticated:
     isLogin = True
 
+  query = request.GET.get('query', '')
+
+  if query:
+    posts = Post.objects.filter(title__icontains=query)
+    return render(request, 'eres/index.html', {"isLogin": isLogin, "posts": posts})    
+
   try:
     posts = Post.objects.all()
     return render(request, 'eres/index.html', {"isLogin": isLogin, "posts": posts})
@@ -44,6 +50,13 @@ def generic(request, post_id):
   except:
     return render(request, 'eres/404.html')
 
+  if request.method == "POST":
+    post.delete()
+    return render(request, 'eres/generic.html', {"isLogin": isLogin, "post": post, "script": "게시글이 삭제되었습니다."})
+
+  if isLogin:
+    return render(request, 'eres/generic.html', {"isLogin": isLogin, "post": post, "me": request.user.first_name})
+
   return render(request, 'eres/generic.html', {"isLogin": isLogin, "post": post})
 
 @csrf_exempt
@@ -71,7 +84,7 @@ def post(request):
       post = Post(title=title, contents=contents, category=category, author=author)
       post.save()
       return redirect("eres:index")
-  return render(request, 'eres/post.html')
+  return render(request, 'eres/post.html', {"isLogin": True})
 
 @csrf_exempt
 def signin(request):

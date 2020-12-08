@@ -46,9 +46,8 @@
 				<!-- Main -->
 					<div id="main">
 						<div class="inner">
-              <section>
                 <h2>글쓰기</h2>
-                <form method="POST" action="{% url 'post' %}" enctype="multipart/form-data" novalidate>
+                <form method="POST" action="{% url 'eres:post' %}" enctype="multipart/form-data" novalidate>
                   {{ form.as_p }}
                   <div class="row gtr-uniform">
                     <div class="col-6 col-12-xsmall">
@@ -85,7 +84,6 @@
                     </div>
                   </div>
                 </form>
-              </section>
 						</div>
 					</div>
 

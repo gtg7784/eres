@@ -42,10 +42,12 @@
 			{% block content %}
 			{% include 'eres/menu.html' %}
 			{% endblock %}
+
+			<!-- Main -->
 			<div class="info">
 				<div class="inner">
 					<h1>내 정보</h1>
-					<form class="infobox" method="POST" action="url 'myinfo'">
+					<form class="infobox" method="POST" action="{% url 'eres:myinfo' %}">
 						{% csrf_token %}
 						<div class="inputbox">
 							<div>

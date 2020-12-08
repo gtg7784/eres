@@ -11,6 +11,12 @@
 		<noscript>
 			<link rel="stylesheet" type="text/css" href="{% static 'assets/css/noscript.css' %}">
 		</noscript>
+		{% if script %}
+		<script>
+			alert("{{ script }}")
+			document.location.href = "/"
+		</script>
+		{% endif %}
 	</head>
 	<body class="is-preload">
 		<!-- Wrapper -->
@@ -28,18 +34,6 @@
 							<!-- Nav -->
 								<nav>
 									<ul>
-										<div class="search">
-											<div class="icon">
-												<span>
-													<svg viewBox="0 0 40 40">
-														<path d="M3,3 L37,37"></path>
-													</svg>
-												</span>
-											</div>
-											<div class="field">
-												<input type="text" placeholder="Search for something...">
-											</div>
-										</div>
 										<li><a href="#menu">Menu</a></li>
 									</ul>
 								</nav>
@@ -63,6 +57,13 @@
 								</span>
 								{% endif %}
 							<p>{{ post.contents }}</p>
+
+							{% if me == post.author %}
+							<form method="POST" action="{% url 'eres:generic' post.id %}">
+								{% csrf_token %}
+								<button type="submit" class="button primary">삭제</a>
+							</form>
+							{% endif %}
 						</div>
 					</div>
 
