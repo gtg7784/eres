@@ -4,6 +4,7 @@ from django.shortcuts import redirect, render
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
 from django.contrib import auth
+from .forms import PostForm
 
 def index(request):
   isLogin = False
@@ -27,6 +28,7 @@ def generic(request):
 
   return render(request, 'eres/generic.html', {"isLogin": isLogin})
 
+@csrf_exempt
 def post(request):
   if not request.user.is_authenticated:
     return redirect("index")
@@ -37,9 +39,18 @@ def post(request):
     category = request.POST.get("category", "")
     author = request.user.first_name
 
-    post = Post(title=title, contents=contents, category=category, author=author)
+    form = PostForm(request.POST, request.FILES)
+    if form.is_valid():
+      post = form.save(commit=False)
+      post.title = title
+      post.contents = contents
+      post.category = category
+      post.author = author
+      post.save()
 
-    
+      return redirect("index")
+    else:
+      return render(request, 'eres/post.html', {"error": "작성한 글이 잘못되었습니다."})  
   return render(request, 'eres/post.html')
 
 @csrf_exempt
@@ -57,7 +68,6 @@ def signin(request):
 
     if user is not None:
       auth.login(request, user)
-      print("LOGIN SUCCESS")
       return redirect("index")
     else:
       return render(request, 'eres/signin.html', {'error': '사용자의 ID 또는 비밀번호가 잘못되었습니다.'})
@@ -81,10 +91,15 @@ def signup(request):
       return render(request, "eres/signup.html", {"error": "비밀번호를 입력해주세요"})
 
     if password1 == password2:
-      user = User.objects.create_user(username=username, password=password1, first_name=first_name)
-      user.save()
-      auth.login(request, user)
-      return redirect("index")
+      try:
+        user = User.objects.create_user(username=username, password=password1, first_name=first_name)
+        user.save()
+        auth.login(request, user)
+        return redirect("index")
+      except Exception:
+        return render(request, 'eres/signup.html', {"error": "아이디가 중복되었습니다 "})
+    else:
+      return render(request, 'eres/signup.html', {"error": "비밀번호가 다릅니다. "})
 
   return render(request, 'eres/signup.html')
 

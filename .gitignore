@@ -155,6 +155,8 @@ dmypy.json
 secrets.*
 !secrets.example.json
 
-
 # visual studio code
 .vscode
+
+# file upload
+uploads

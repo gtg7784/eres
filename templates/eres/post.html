@@ -48,7 +48,8 @@
 						<div class="inner">
               <section>
                 <h2>글쓰기</h2>
-                <form method="POST" action="{% url 'post' %}">
+                <form method="POST" action="{% url 'post' %}" enctype="multipart/form-data" novalidate>
+                  {{ form.as_p }}
                   <div class="row gtr-uniform">
                     <div class="col-6 col-12-xsmall">
                       <input type="text" name="title" id="name" placeholder="제목" />
@@ -68,9 +69,15 @@
                     </div>
                     <div class="col-12">
                       <ul class="actions">
-                        <li><input class="button solid" value="사진 업로드" /></li>
+                        <li>
+                          <label for="photos" class="button solid" style="margin: 0px;" >사진 업로드</label>
+                          <input id="photos" name="file" type="file" accept="image/png, image/jpeg" style="display: none !important;" />
+                        </li>
                       </ul>
-                    </div>
+										</div>
+                    {% if error %}
+                      <div class="error">{{ error }}</div>
+                    {% endif %}
                     <div class="col-12">
                       <ul class="actions">
                         <li><input type="submit" value="작성" class="primary" /></li>
