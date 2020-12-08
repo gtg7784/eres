@@ -160,3 +160,6 @@ secrets.*
 
 # file upload
 uploads
+
+# dssootre
+.DS_Store
