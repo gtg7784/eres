@@ -1,14 +1,14 @@
-from django.conf.urls import url
+from django.urls import path
 
 from . import views
 
 urlpatterns = [
-    url('index/', views.index, name='index'),
-    url(r'^$', views.index, name='index'),
-    url('generic/', views.generic, name='generic'),
-    url('post/', views.post, name='post'),
-    url('signin/', views.signin, name='signin'),
-    url('signup/', views.signup, name='signup'),
-    url('signout/', views.signout, name='signout'),
-    url('myinfo/', views.myinfo, name="myinfo")
+    path('index/', views.index, name='index'),
+    path('', views.index, name='index'),
+    path('generic/<int:post_id>', views.generic, name='generic'),
+    path('post/', views.post, name='post'),
+    path('signin/', views.signin, name='signin'),
+    path('signup/', views.signup, name='signup'),
+    path('signout/', views.signout, name='signout'),
+    path('myinfo/', views.myinfo, name="myinfo")
 ]

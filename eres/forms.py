@@ -9,9 +9,3 @@ class PostForm(forms.ModelForm):
   def __init__(self, *args, **kwargs):
     super(PostForm, self).__init__(*args, **kwargs)
     self.fields['file'].required = True
-
-  # def save(self, commit=True):
-  #   self.instance = Post(**self.cleaned_data)
-  #   if commit:
-  #     self.instance.save()
-  #   return self.instance

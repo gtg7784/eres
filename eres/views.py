@@ -11,6 +11,12 @@ def index(request):
   if request.user.is_authenticated:
     isLogin = True
 
+  try:
+    posts = Post.objects.all()
+    return render(request, 'eres/index.html', {"isLogin": isLogin, "posts": posts})
+  except:
+    pass
+
   return render(request, 'eres/index.html', {"isLogin": isLogin})
 
 def category(request):
@@ -21,12 +27,17 @@ def category(request):
   category = request.GET.get('category', None)
   return render(request, 'eres/index.html', {"category": category, "isLogin": isLogin})
 
-def generic(request):
+def generic(request, post_id):
   isLogin = False
   if request.user.is_authenticated:
     isLogin = True
 
-  return render(request, 'eres/generic.html', {"isLogin": isLogin})
+  try:
+    post = Post.objects.get(id=post_id)
+  except:
+    return render(request, 'eres/404.html')
+
+  return render(request, 'eres/generic.html', {"isLogin": isLogin, "post": post})
 
 @csrf_exempt
 def post(request):
@@ -50,7 +61,9 @@ def post(request):
 
       return redirect("index")
     else:
-      return render(request, 'eres/post.html', {"error": "작성한 글이 잘못되었습니다."})  
+      post = Post(title=title, contents=contents, category=category, author=author)
+      post.save()
+      return redirect("index")
   return render(request, 'eres/post.html')
 
 @csrf_exempt
