@@ -80,7 +80,9 @@
 							{% if posts %}
 								{% for i in posts %}
 									<li class="list-group-item list-group-item-light post-list">
-										<span>{{ i.title }}</span>
+										<span>
+											<a href="/generic/{{ i.id }}" style="border: none; color: inherit;">{{ i.title }}</a>
+										</span>
 										<span>{{ i.create_at }}</span>
 									</li>
 								{% endfor %}

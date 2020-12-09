@@ -145,5 +145,5 @@ STATICFILES_DIRS = [
 ]
 
 # 사진
-MEDIA_URL = '/files/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads') 
+MEDIA_URL = '/files/' # url
+MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads') # 저장할 곳
