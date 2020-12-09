@@ -3535,7 +3535,7 @@ input, select, textarea {
 			border-radius: 100%;
 			float: right;
 			box-shadow: 0px 10px 10px;
-			text-overflow: none;
+			text-overflow: unset;
 	   }
 		
 	   .plus:hover{
